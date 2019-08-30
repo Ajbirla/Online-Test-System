@@ -4,7 +4,6 @@ class Admin::HomeController < ApplicationController
    end
 
    def not_found
-       fail  
+ 
    end
-
 end

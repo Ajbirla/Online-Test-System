@@ -4,20 +4,19 @@
 	<%current_page= params[:page].to_i%>
 	<% if @questions.first.q_type == "MAQ" %>
 		<% @questions.first.choices.each do |option| %>
-		    <%= check_box_tag "answer[choice_ids][]", option.id, false %>
-		    <%= label_tag "answer[choice_ids][]", option.choice,:class=>"option" %>
-		     <br> 
+		  <%= check_box_tag "answer[choice_ids][]", option.id, false %>
+		  <%= label_tag "answer[choice_ids][]", option.choice,:class=>"option" %>
+		  <br> 
 		<% end %>  
 	<%else%>
 		<% @questions.first.choices.each do |option| %>
-			<%= radio_button_tag "answer[choice_ids][]", option.id, is_check(@answers, option.id) %>
+			<%= radio_button_tag "answer[choice_ids][]", option.id, false %>
 		  <%= label_tag "answer[choice_ids][]", option.choice,:class=>"option"  %>
 		  <br> 
-	  	<% end %> 
-
+	  <% end %> 
 	<%end%>  
 
-	<%= hidden_field_tag :test_id,@test.id%>
+	<%= hidden_field_tag :id,@test.id%>
 	<%=f.hidden_field :question_id %>
 	<%=f.hidden_field :page,value: params[:page]%>
 	

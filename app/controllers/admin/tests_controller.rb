@@ -8,18 +8,15 @@ class Admin::TestsController < ApplicationController
   end
   
   def show
-     
   end
 
   def preview
-    
   end
 
   # GET /tests/new
   def new
     @test = Test.new
-
- end
+  end
 
   # GET /tests/1/edit
   def edit

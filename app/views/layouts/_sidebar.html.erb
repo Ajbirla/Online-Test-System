@@ -1,5 +1,5 @@
-  <div class="well sidebar-nav">
-    <div class="list-group">
+<div class="well sidebar-nav">
+  <div class="list-group">
     <h3>Navigation</h3>
     <ul class="nav nav-list">
       <li class="nav-header"></li>
@@ -8,11 +8,11 @@
         <div class="list-group-item"><%= link_to "Users", admin_users_path  %></div>
         <div class="list-group-item"><%= link_to "Tests", admin_tests_path  %></div>
       <%else%>
-          <%if user_signed_in? && current_user.user?%>
-            <div class="list-group-item"><%= link_to "See Tests List", tests_path  %></div>
-          <%end%>
+        <%if user_signed_in? && current_user.user?%>
+          <div class="list-group-item"><%= link_to "See Tests List", tests_path  %></div>
+        <%end%>
       <%end%>
     </ul>
   </div>
-  </div><!--/.well -->
+</div><!--/.well -->
 

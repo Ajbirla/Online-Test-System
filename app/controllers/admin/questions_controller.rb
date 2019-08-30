@@ -16,7 +16,6 @@ class Admin::QuestionsController < ApplicationController
   
   def create
     @question = Question.new(question_params)
-    
     if @question.save
       flash[:notice] = "Successfully created question."
       redirect_to admin_questions_path
