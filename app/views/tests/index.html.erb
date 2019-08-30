@@ -1,0 +1,37 @@
+<%- model_class = Test -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      
+      <th><%= model_class.human_attribute_name(:no_of_questions) %></th>
+      <th><%= model_class.human_attribute_name(:duration) %></th>
+      
+      <th><%= model_class.human_attribute_name(:total_mark) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tests.each do |test| %>
+      <tr>
+        <td><%= link_to test.id, test_path(test) %></td>
+       
+        <td><%= test.no_of_questions %></td>
+        <td><%= test.duration.strftime("%H:%M:%S") %></td>
+        <td><%= test.total_mark %></td>
+        <td><%= test.name %></td>
+        
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      test_path(test), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

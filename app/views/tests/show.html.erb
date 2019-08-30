@@ -1,0 +1,28 @@
+<%- model_class = Test -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  
+  <dt><strong><%= model_class.human_attribute_name(:no_of_questions) %>:</strong></dt>
+  <dd><%= @test.no_of_questions %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:duration) %>:</strong></dt>
+  <dd><%= @test.duration.strftime("%H:%M:%S") %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @test.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:total_mark) %>:</strong></dt>
+  <dd><%= @test.total_mark %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @test.name %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              tests_path, :class => 'btn btn-default'  %>
+<% if @submittedTest.empty? %>
+    <%= link_to t('.start test', :default => t("helpers.links.start test")),
+                  paper_path(@test), :class => 'start-test btn btn-default'  %>
+<% else %>
+    <%= link_to t('.see result', :default => t("helpers.links.see result")),
+              result_path(@test), :class => 'btn btn-success'  %>
+<%end%>

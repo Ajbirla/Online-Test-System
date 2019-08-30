@@ -1,0 +1,31 @@
+<%= ans.question.question %><br>
+<%=form_for @answer, :html => { :class => "form-horizontal test" } do |f|%>
+	<%= f.hidden_field :spend_time ,class: "duration-class"%>
+	<%current_page= params[:page].to_i%>
+	<% if @questions.first.q_type == "MAQ" %>
+		<% @questions.first.choices.each do |option| %>
+		    <%= check_box_tag "answer[choice_ids][]", option.id, false %>
+		    <%= label_tag "answer[choice_ids][]", option.choice,:class=>"option" %>
+		     <br> 
+		<% end %>  
+	<%else%>
+		<% @questions.first.choices.each do |option| %>
+			<%= radio_button_tag "answer[choice_ids][]", option.id, is_check(@answers, option.id) %>
+		  <%= label_tag "answer[choice_ids][]", option.choice,:class=>"option"  %>
+		  <br> 
+	  	<% end %> 
+
+	<%end%>  
+
+	<%= hidden_field_tag :test_id,@test.id%>
+	<%=f.hidden_field :question_id %>
+	<%=f.hidden_field :page,value: params[:page]%>
+	
+	<%#= f.submit "update", :class => 'submit btn btn-primary'%>
+	<%if @test.questions.count != current_page%>
+		<%= f.submit "submit", :class => 'submit btn btn-primary'%>
+	<%else%>
+		<%= f.submit "submit test", :class => 'submit_test btn btn-danger'%>
+	<%end%>
+<%end%>
+<%= link_to "submit test",submit_test_path(@test),:class => 'submit_test button span hide'%>

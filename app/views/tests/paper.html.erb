@@ -1,0 +1,25 @@
+<div class="pull-right">
+<h3 class='timer' data-seconds-left = <%= get_test_time %> >Remaining Time:
+  
+</h3>
+</div>
+<h1>Test</h1>
+
+<div class="panel panel-primary">
+      <div class="panel-heading">
+          <strong>Name:</strong>
+          <%= @test.name %>
+      </div>
+      <div class="panel-body">
+          <div class="question">
+              <%= render 'answers/question', ans: @answer%> 
+          </div>
+      </div>
+</div>
+
+<%# paginate @questions,class: "questions_pagination"%>
+<script type="text/javascript">
+  
+  bindTimer('.timer');
+</script>
+

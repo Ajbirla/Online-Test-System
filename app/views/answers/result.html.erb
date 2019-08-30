@@ -1,0 +1,49 @@
+<h1>Result</h1>
+<div class="panel panel-primary">
+   <div class="panel-body">		
+		<strong>Email:</strong>
+			<%=current_user.email%><br>
+		<strong>Total Questions:</strong>
+			<%= @question_count%><br>
+		<strong>Score:</strong>
+			<%= getResult(@result)%> out of <%= @test.total_mark%> marks<br>	<%#end%>
+
+			<%@test.questions.each_with_index do |tq,index|%>
+				<%=index+1%>)<%=tq.question%><br>
+				<%ch=("a".ord-1).chr%>
+				<%tq.choices.each do |c|%>
+					<%if c.is_correct%>
+						<div class="alert-success">
+							&nbsp&nbsp&nbsp<%=ch=ch.next%>)
+							<%= c.choice%><br>
+						</div>
+						<%else%>
+							<div>
+								&nbsp&nbsp&nbsp<%=ch=ch.next%>)<%=c.choice%>
+							</div>
+						<%end%> 
+					<%#end%>
+				<%end%>
+				<br>
+				Your Answer:
+				<%#binding.pry%>
+				<% if @result.first != nil && tq.user_answer(@result.first.user_id) != nil %>
+					<%if tq.user_answer(@result.first.user_id).is_correct?  %>
+						<div class="alert-success">
+					<%else%>
+						<div class="alert-danger">
+					<%end%>
+							<%tq.user_answer(@result.first.user_id).choices.each do |ans|%>
+							<%=ans.choice%>
+						<%end%>
+						</div>
+					<hr>
+				<%else%>
+							<div class="alert-danger">Not Attempted!!</div>
+
+				<% end %>
+		<%end%>
+		<br> 
+		<input type="button" value="Back" class="back" onclick="back()">
+   </div>
+</div>

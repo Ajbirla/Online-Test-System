@@ -1,0 +1,13 @@
+$('.question').html("<%= escape_javascript(render 'answers/question', ans: @answer) %>");
+$('.questions_pagination').html("<%= escape_javascript(paginate @questions, params: {controller: 'tests', action: 'paper'}) %>")
+
+$(document).on("click",'#choice_id', function(){
+  // var cb = $('input[type="checkbox"]');
+  // cb.prop("checked", !cb.prop("checked"));
+  var check_boxes = $('input[type=checkbox]');
+    check_boxes.click(function() {
+    check_boxes.prop('checked', false);
+  $(this).prop('checked', true);
+});
+});
+

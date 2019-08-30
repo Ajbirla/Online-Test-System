@@ -1,0 +1,10 @@
+<p class="fields">
+	<%= f.fields_for :choices do |builder| %>
+
+  <%= f.label :choice,"choice" %><br />
+  <%= f.text_field :choice%><br />
+  <%= f.hidden_field :_destroy %>
+  <%= f.link_to_remove "remove"%>
+  <% end %>
+</p>
+  

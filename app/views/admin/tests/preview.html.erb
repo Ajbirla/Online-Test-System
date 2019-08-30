@@ -1,0 +1,34 @@
+<center><h1>Test Paper</h1></center>
+
+<div class="pull-right">
+ 	time:<%= @test.duration.strftime("%H:%M:%S")%>
+ </div>
+ <br>
+ <br>
+ 	<%@test.questions.each_with_index do |tq,index|%>
+				<%=index+1%>)<%=tq.question%><br>
+				<%ch=("a".ord-1).chr%>
+				<%tq.choices.each do |c|%>
+					<%if c.is_correct%>
+						<div class="alert-success">
+							&nbsp&nbsp&nbsp<%=ch=ch.next%>)
+							<%=c.choice%><br>
+						</div>
+						<%else%>
+							<div>
+								&nbsp&nbsp&nbsp<%=ch=ch.next%>)<%=c.choice%>
+							</div>
+						<%end%> 
+					<%#end%>
+				<%end%>
+				<br>
+			<%end%>
+
+<%= link_to "PRINT", '#', onclick: "printpage()" %>
+
+<script type="text/javascript">
+function printpage()
+{
+  window.print()
+}
+</script>

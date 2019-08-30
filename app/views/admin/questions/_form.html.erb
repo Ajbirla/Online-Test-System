@@ -1,0 +1,74 @@
+<%= nested_form_for [:admin,@question], :html => { :class => "form-horizontal question" } do |f| %>
+  <% if @question.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @question.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :question, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :question, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:question) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :q_type, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%binding.pry%>
+      <%= f.select :q_type, Question.q_types.keys.map {|q_type| [q_type.titleize,q_type]},{}, :class => 'form-control q_type' %>
+      <%#= f.select :q_type, ['MCQ','MAQ','FILL_In_The_Blank','True_False'],{}, :class => 'form-control q_type'%>
+    </div>
+    <%=f.error_span(:q_type) %>
+  </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      
+      <th>choice</th>
+      <th>is_correct?</th>
+      
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <%= f.fields_for :choices do |choices_form| %>
+<tbody class='fields'>
+      
+     <tr>
+            <td>  <%= choices_form.text_field :choice%></td>
+            <%#= choices_form.radio_button :is_correct, false, :checked => false %>
+            <%#= radio_button_tag "is_correct", choices_form.index, choices_form.object.is_correct %>
+             <%#= choices_form.radio_button :is_correct=>true, :name =>  
+           "choices_attributes" %>
+            <td><%= choices_form.check_box :is_correct, class: 'check_box'%></td>
+            <td><%= choices_form.link_to_remove "Remove choice",:class => 'btn btn-default btn-xs'%></td>
+        
+    </tr>
+     
+    </tbody>
+    <% end %>
+  </table>
+      
+       
+    
+     <p><%= f.link_to_add "Add a option", :choices,:class => 'btn btn-default btn-xs' %></p>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_questions_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
